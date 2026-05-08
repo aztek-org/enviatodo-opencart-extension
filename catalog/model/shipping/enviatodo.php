@@ -29,6 +29,11 @@ class Enviatodo extends \Opencart\System\Engine\Model {
 
 		$geo_zone_id = (int)$this->config->get('shipping_enviatodo_geo_zone_id');
 
+		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/Logger.php';
+		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/Client.php';
+		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/AddressMapper.php';
+		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/PackageBuilder.php';
+
 		if ($geo_zone_id) {
 			$results = $this->model_localisation_geo_zone->getGeoZone(
 				$geo_zone_id,
@@ -37,18 +42,15 @@ class Enviatodo extends \Opencart\System\Engine\Model {
 			);
 
 			if (!$results) {
+				$this->diagnose('getQuote.skip', 'destination ' . (int)($address['country_id'] ?? 0) . '/' . (int)($address['zone_id'] ?? 0) . ' is outside geo_zone ' . $geo_zone_id);
 				return [];
 			}
 		}
 
-		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/Logger.php';
-		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/Client.php';
-		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/AddressMapper.php';
-		require_once DIR_EXTENSION . 'enviatodo/system/library/enviatodo/PackageBuilder.php';
-
 		$origin = $this->resolveOrigin();
 
 		if (!$origin) {
+			$this->diagnose('getQuote.skip', 'no origin configured in oc_enviatodo_origin');
 			return [];
 		}
 
@@ -98,6 +100,7 @@ class Enviatodo extends \Opencart\System\Engine\Model {
 				$rates = $this->fetchRates($body);
 				$this->cacheSet($cacheKey, $rates);
 			} catch (\Throwable $e) {
+				$this->diagnose('rates_client.exception', $e->getMessage());
 				return [];
 			}
 		}
@@ -196,6 +199,20 @@ class Enviatodo extends \Opencart\System\Engine\Model {
 	}
 
 	/**
+	 * Always-on diagnostic logger for silent early-returns. Writes at
+	 * "error" level even when the user has set log_level=off, so admins
+	 * can see why no quote appeared in oc_enviatodo_log / DIR_LOGS.
+	 */
+	private function diagnose(string $endpoint, string $message): void {
+		try {
+			$logger = new \Opencart\System\Library\Enviatodo\Logger($this->db, 'error');
+			$logger->write('error', $endpoint, null, $message);
+		} catch (\Throwable $e) {
+			// Best-effort logging only.
+		}
+	}
+
+	/**
 	 * @param array<string, mixed> $body
 	 *
 	 * @return array<int, array<string, mixed>>
@@ -208,6 +225,8 @@ class Enviatodo extends \Opencart\System\Engine\Model {
 		$baseOverride = $this->config->get('shipping_enviatodo_base_url_override');
 
 		if ($token === '') {
+			$diagLogger = new \Opencart\System\Library\Enviatodo\Logger($this->db, 'error');
+			$diagLogger->write('error', 'rates_client.skip', null, 'token empty for environment=' . $environment . ' (set shipping_enviatodo_token_' . $environment . ' or change environment)');
 			return [];
 		}
 

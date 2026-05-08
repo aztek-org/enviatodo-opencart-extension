@@ -98,6 +98,17 @@ class Enviatodo extends \Opencart\System\Engine\Controller {
 		}
 
 		if (!$json) {
+			$post        = $this->request->post;
+			$environment = (string)($post['shipping_enviatodo_environment'] ?? 'sandbox');
+			$tokenKey    = $environment === 'production' ? 'shipping_enviatodo_token_production' : 'shipping_enviatodo_token_sandbox';
+			$status      = (int)($post['shipping_enviatodo_status'] ?? 0);
+
+			if ($status === 1 && trim((string)($post[$tokenKey] ?? '')) === '') {
+				$json['error'] = sprintf($this->language->get('error_token_for_env'), $environment);
+			}
+		}
+
+		if (!$json) {
 			$this->load->model('setting/setting');
 
 			$this->model_setting_setting->editSetting('shipping_enviatodo', $this->request->post);

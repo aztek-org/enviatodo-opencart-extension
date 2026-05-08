@@ -59,21 +59,23 @@ class AddressMapper {
 		$street    = trim((string)($address['address_1'] ?? ''));
 		$int       = trim((string)($address['address_2'] ?? ''));
 		$phone     = preg_replace('/\D+/', '', (string)($address['telephone'] ?? '')) ?? '';
+		$email     = trim((string)($address['email'] ?? ''));
+		$city      = trim((string)($address['city'] ?? ''));
 
 		return [
 			'address_type_id' => '2',
 			'full_name'       => $full_name !== '' ? $full_name : 'Cliente',
 			'name'            => trim((string)($address['firstname'] ?? '')) ?: 'Cliente',
 			'company'         => trim((string)($address['company'] ?? '')),
-			'email'           => (string)($address['email'] ?? ''),
+			'email'           => $email !== '' ? $email : 'quote@example.com',
 			'telephone'       => $phone !== '' ? $phone : '0000000000',
 			'street'          => $street !== '' ? $street : '-',
 			'ext_number'      => 'S/N',
 			'int_number'      => $int,
 			'zip_code'        => (string)($address['postcode'] ?? ''),
 			'suburb'          => trim((string)($address['address_2'] ?? '')) !== '' ? trim((string)$address['address_2']) : 'N/A',
-			'municipality'    => (string)($address['city'] ?? ''),
-			'town'            => (string)($address['city'] ?? ''),
+			'municipality'    => $city !== '' ? $city : 'N/A',
+			'town'            => $city !== '' ? $city : 'N/A',
 			'state'           => (string)($zone['name'] ?? ''),
 			'state_code'      => (string)($zone['code'] ?? ''),
 			'country_code'    => strtoupper((string)($country['iso_code_2'] ?? 'MX')),

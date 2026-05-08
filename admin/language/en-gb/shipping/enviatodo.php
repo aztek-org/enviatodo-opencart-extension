@@ -95,6 +95,7 @@ $_['help_logs_phase']             = 'API request/response log viewer is added in
 // Error
 $_['error_permission']            = 'Warning: You do not have permission to modify EnviaTodo shipping!';
 $_['error_token_missing']         = 'API token is empty for the selected environment. Save the form (or fill the token field) before testing the connection.';
+$_['error_token_for_env']         = 'Cannot enable EnviaTodo: the %s token is empty. Either paste a token for that environment or switch the environment selector before saving.';
 $_['error_origin_not_found']      = 'Origin not found.';
 $_['error_origin_name']           = 'Name is required.';
 $_['error_origin_postal_code']    = 'Postal code is required.';

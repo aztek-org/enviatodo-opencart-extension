@@ -11,7 +11,7 @@
       {% if logs %}
         {% for log in logs %}
           <tr>
-            <td><small class="text-muted">{{ log.created_at }}</small></td>
+            <td><small class="text-muted">{{ log.date_added }}</small></td>
             <td>
               {% if log.level == 'error' %}<span class="badge bg-danger">{{ log.level }}</span>
               {% elseif log.level == 'info' %}<span class="badge bg-info">{{ log.level }}</span>

@@ -95,6 +95,7 @@ $_['help_logs_phase']             = 'El visor de registros de la API se agrega e
 // Error
 $_['error_permission']            = 'Atención: No tienes permiso para modificar el envío EnviaTodo.';
 $_['error_token_missing']         = 'El token API está vacío para el entorno seleccionado. Guarda el formulario (o llena el campo del token) antes de probar la conexión.';
+$_['error_token_for_env']         = 'No se puede activar EnviaTodo: el token de %s está vacío. Pega un token para ese entorno o cambia el selector de entorno antes de guardar.';
 $_['error_origin_not_found']      = 'Origen no encontrado.';
 $_['error_origin_name']           = 'El nombre es obligatorio.';
 $_['error_origin_postal_code']    = 'El código postal es obligatorio.';
