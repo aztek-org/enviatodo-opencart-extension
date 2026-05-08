@@ -1,0 +1,201 @@
+<div id="enviatodo-shipment-panel" data-order-id="{{ order_id }}">
+	<style>
+		#enviatodo-shipment-panel .et-card     { border:1px solid #dee2e6; border-radius:4px; padding:15px; margin-bottom:15px; background:#fff; }
+		#enviatodo-shipment-panel .et-row      { display:flex; flex-wrap:wrap; gap:8px 16px; margin-bottom:8px; }
+		#enviatodo-shipment-panel .et-row > b  { min-width:160px; }
+		#enviatodo-shipment-panel .et-actions  { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+		#enviatodo-shipment-panel .et-rates    { width:100%; margin-top:10px; }
+		#enviatodo-shipment-panel .et-status   { display:inline-block; padding:2px 8px; border-radius:10px; background:#e9ecef; font-size:.85em; }
+		#enviatodo-shipment-panel .et-status.cancelled { background:#f8d7da; color:#842029; }
+		#enviatodo-shipment-panel .et-status.delivered { background:#d1e7dd; color:#0f5132; }
+		#enviatodo-shipment-panel .et-msg      { margin:8px 0; padding:8px 10px; border-radius:4px; }
+		#enviatodo-shipment-panel .et-msg.ok   { background:#d1e7dd; color:#0f5132; }
+		#enviatodo-shipment-panel .et-msg.err  { background:#f8d7da; color:#842029; }
+		#enviatodo-shipment-panel .et-spinner  { display:inline-block; width:14px; height:14px; border:2px solid #ccc; border-top-color:#666; border-radius:50%; animation:et-spin 1s linear infinite; vertical-align:-2px; }
+		@keyframes et-spin { to { transform:rotate(360deg); } }
+	</style>
+
+	<div class="et-msg-host"></div>
+
+	<div class="et-card">
+		<div class="et-row"><b>{{ text_shipping_method }}:</b> <span>{{ shipping_method ?: '—' }}</span></div>
+		<div class="et-row"><b>{{ text_shipping_code }}:</b> <code>{{ shipping_code ?: '—' }}</code></div>
+
+		{% if shipment %}
+			<div class="et-row"><b>{{ text_status }}:</b> <span class="et-status {{ shipment.status }}">{{ shipment.status }}</span></div>
+			<div class="et-row"><b>{{ text_tracking }}:</b> <code>{{ shipment.tracking_number ?: '—' }}</code></div>
+			<div class="et-row"><b>{{ text_carrier }}:</b> <span>{{ shipment.carrier ?: '—' }}</span></div>
+			<div class="et-row"><b>{{ text_service }}:</b> <span>{{ shipment.service ?: '—' }}</span></div>
+			{% if shipment.label_url and (shipment.label_url starts with 'http://' or shipment.label_url starts with 'https://') %}
+				<div class="et-row"><b>{{ text_label }}:</b> <a href="{{ shipment.label_url }}" target="_blank" rel="noopener">{{ button_open_label }}</a></div>
+			{% endif %}
+
+			<div class="et-actions">
+				{% if shipment.status != 'cancelled' %}
+					<button type="button" class="btn btn-primary btn-sm" data-action="download">{{ button_download_label }}</button>
+					<button type="button" class="btn btn-secondary btn-sm" data-action="refresh">{{ button_refresh_tracking }}</button>
+					<button type="button" class="btn btn-danger btn-sm" data-action="cancel">{{ button_cancel_shipment }}</button>
+				{% endif %}
+			</div>
+		{% else %}
+			<p>{{ text_no_shipment }}</p>
+
+			{% if not is_enviatodo %}
+				<div class="alert alert-warning" style="margin-top:8px;">{{ text_not_enviatodo_order }}</div>
+			{% endif %}
+
+			<div class="et-actions">
+				<button type="button" class="btn btn-primary btn-sm" data-action="quick-generate">{{ button_generate_label }}</button>
+				<button type="button" class="btn btn-secondary btn-sm" data-action="requote">{{ button_requote }}</button>
+			</div>
+
+			<div class="et-rates-host" style="margin-top:12px;"></div>
+		{% endif %}
+	</div>
+</div>
+
+<script>
+(function () {
+	if (window.__enviatodoShipmentPanelInit) {
+		window.__enviatodoShipmentPanelInit();
+		return;
+	}
+
+	let root = document.getElementById('enviatodo-shipment-panel');
+	if (!root) return;
+
+	const order_id    = root.dataset.orderId;
+	const url_quote   = '{{ url_quote }}';
+	const url_gen     = '{{ url_generate }}';
+	const url_cancel  = '{{ url_cancel }}';
+	const url_dl      = '{{ url_download }}';
+	const url_refresh = '{{ url_refresh }}';
+	const url_panel   = '{{ url_panel }}';
+
+	function showMsg(text, ok) {
+		const msgHost = root.querySelector('.et-msg-host');
+		if (!msgHost) return;
+		msgHost.innerHTML = '';
+		const d = document.createElement('div');
+		d.className = 'et-msg ' + (ok ? 'ok' : 'err');
+		d.textContent = text;
+		msgHost.appendChild(d);
+		setTimeout(function () { d.remove(); }, ok ? 4000 : 9000);
+	}
+
+	function reloadPanel() {
+		fetch(url_panel, { credentials: 'same-origin' })
+			.then(function (r) { return r.text(); })
+			.then(function (html) {
+				const wrap = document.createElement('div');
+				wrap.innerHTML = html;
+				const fresh = wrap.querySelector('#enviatodo-shipment-panel');
+				if (fresh) {
+					root.replaceWith(fresh);
+					root = fresh;
+					bindRoot();
+				}
+			});
+	}
+
+	function call(url, payload, btn) {
+		if (btn) btn.disabled = true;
+		const fd = new FormData();
+		Object.keys(payload || {}).forEach(function (k) { fd.append(k, payload[k]); });
+		return fetch(url, { method: 'POST', body: fd, credentials: 'same-origin' })
+			.then(function (r) { return r.json(); })
+			.finally(function () { if (btn) btn.disabled = false; });
+	}
+
+	function renderRates(rates, uuid, host) {
+		host.innerHTML = '';
+		if (!rates || !rates.length) {
+			host.innerHTML = '<em>{{ text_no_rates }}</em>';
+			return;
+		}
+		const tbl = document.createElement('table');
+		tbl.className = 'table table-sm et-rates';
+		tbl.innerHTML = '<thead><tr><th>{{ text_carrier }}</th><th>{{ text_service }}</th><th>{{ text_cost }}</th><th></th></tr></thead><tbody></tbody>';
+		const tb = tbl.querySelector('tbody');
+		rates.forEach(function (r) {
+			const tr = document.createElement('tr');
+			tr.innerHTML =
+				'<td>' + (r.provider_id || '?') + '</td>' +
+				'<td>' + (r.service_name || '') + ' ' + (r.via_transport ? '(' + r.via_transport + ')' : '') + '</td>' +
+				'<td>' + Number(r.cost).toFixed(2) + '</td>' +
+				'<td><button type="button" class="btn btn-success btn-sm">{{ button_generate_label }}</button></td>';
+			tr.querySelector('button').addEventListener('click', function (e) {
+				const btn = e.target;
+				call(url_gen, {
+					order_id: order_id,
+					provider_id: r.provider_id,
+					provider_service_id: r.provider_service_id
+				}, btn).then(function (j) {
+					if (j.error) { showMsg(j.error, false); return; }
+					showMsg(j.success || '{{ text_label_generated }}', true);
+					reloadPanel();
+				});
+			});
+			tb.appendChild(tr);
+		});
+		host.appendChild(tbl);
+	}
+
+	function bindRoot() {
+		root.addEventListener('click', function (e) {
+		const btn = e.target.closest('[data-action]');
+		if (!btn) return;
+		const action = btn.dataset.action;
+
+		if (action === 'quick-generate') {
+			call(url_gen, { order_id: order_id }, btn).then(function (j) {
+				if (j.error) {
+					showMsg(j.error, false);
+					if (j.rates) {
+						const host = root.querySelector('.et-rates-host');
+						if (host) renderRates(j.rates, j.uuid, host);
+					}
+					return;
+				}
+				showMsg(j.success || '{{ text_label_generated }}', true);
+				reloadPanel();
+			});
+		} else if (action === 'requote') {
+			const host = root.querySelector('.et-rates-host');
+			if (host) host.innerHTML = '<span class="et-spinner"></span> …';
+			fetch(url_quote + '&order_id=' + encodeURIComponent(order_id), { credentials: 'same-origin' })
+				.then(function (r) { return r.json(); })
+				.then(function (j) {
+					if (j.error) { showMsg(j.error, false); if (host) host.innerHTML = ''; return; }
+					if (host) renderRates(j.rates, j.uuid, host);
+				});
+		} else if (action === 'download') {
+			window.open(url_dl + '&order_id=' + encodeURIComponent(order_id), '_blank', 'noopener');
+		} else if (action === 'refresh') {
+			call(url_refresh, { order_id: order_id }, btn).then(function (j) {
+				if (j.error) { showMsg(j.error, false); return; }
+				showMsg(j.success || '{{ text_tracking_refreshed }}', true);
+				reloadPanel();
+			});
+		} else if (action === 'cancel') {
+			if (!confirm('{{ text_confirm_cancel }}')) return;
+			call(url_cancel, { order_id: order_id }, btn).then(function (j) {
+				if (j.error) { showMsg(j.error, false); return; }
+				showMsg(j.success || '{{ text_shipment_cancelled }}', true);
+				reloadPanel();
+			});
+		}
+		});
+	}
+
+	window.__enviatodoShipmentPanelInit = function () {
+		const fresh = document.getElementById('enviatodo-shipment-panel');
+		if (fresh && fresh !== root) {
+			root = fresh;
+			bindRoot();
+		}
+	};
+
+	bindRoot();
+})();
+</script>

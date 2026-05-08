@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-9">
+    <h4><i class="fa-solid fa-cog text-primary me-1"></i> {{ tab_settings }}</h4>
+    <p>{{ docs_settings }}</p>
+    <ul>
+      <li><strong>{{ entry_environment }}</strong> — {{ docs_environment }}</li>
+      <li><strong>{{ entry_token_sandbox }} / {{ entry_token_production }}</strong> — {{ docs_token }}</li>
+      <li><strong>{{ entry_base_url_override }}</strong> — {{ docs_base_url_override }}</li>
+      <li><strong>{{ entry_default_origin }}</strong> — {{ docs_default_origin }}</li>
+      <li><strong>{{ entry_package_strategy }}</strong> — {{ docs_strategy }}</li>
+      <li><strong>{{ entry_log_level }}</strong> — {{ docs_log_level }}</li>
+    </ul>
+
+    <hr>
+
+    <h4><i class="fa-solid fa-warehouse text-primary me-1"></i> {{ tab_origins }}</h4>
+    <p>{{ docs_origins_intro }}</p>
+    <p>{{ docs_origins_default }}</p>
+    <p>{{ docs_origins_required }}</p>
+
+    <hr>
+
+    <h4><i class="fa-solid fa-truck text-primary me-1"></i> {{ tab_carriers }}</h4>
+    <p>{{ docs_carriers_intro }}</p>
+    <p>{{ docs_carriers_refresh }}</p>
+
+    <hr>
+
+    <h4><i class="fa-solid fa-list-ul text-primary me-1"></i> {{ tab_logs }}</h4>
+    <p>{{ docs_logs_intro }}</p>
+    <p>{{ docs_logs_levels }}</p>
+    <p>{{ docs_logs_files|raw }}</p>
+
+    <hr>
+
+    <h4><i class="fa-solid fa-life-ring text-primary me-1"></i> {{ docs_help_title }}</h4>
+    <p>{{ docs_help_body|raw }}</p>
+  </div>
+  <div class="col-md-3">
+    <div class="card border-info">
+      <div class="card-header bg-info text-white"><i class="fa-solid fa-circle-info"></i> {{ docs_quickstart_title }}</div>
+      <div class="card-body small">
+        <ol class="mb-0 ps-3">
+          <li>{{ docs_quickstart_step1 }}</li>
+          <li>{{ docs_quickstart_step2 }}</li>
+          <li>{{ docs_quickstart_step3 }}</li>
+          <li>{{ docs_quickstart_step4 }}</li>
+          <li>{{ docs_quickstart_step5 }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>

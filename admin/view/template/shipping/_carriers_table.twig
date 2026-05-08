@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <td>{{ column_carrier_code }}</td>
+        <td>{{ column_carrier_name }}</td>
+        <td class="text-end">{{ column_carrier_refreshed }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% if carriers %}
+        {% for carrier in carriers %}
+          <tr>
+            <td><code>{{ carrier.code }}</code></td>
+            <td>{{ carrier.name }}</td>
+            <td class="text-end"><small class="text-muted">{{ carrier.refreshed_at }}</small></td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="3" class="text-center text-muted">{{ text_no_carriers }}</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>

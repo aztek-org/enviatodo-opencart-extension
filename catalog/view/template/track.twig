@@ -1,0 +1,119 @@
+{{ header }}
+<div id="account-order-track" class="container">
+	<ul class="breadcrumb">
+		{% for breadcrumb in breadcrumbs %}
+			<li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		{% endfor %}
+	</ul>
+	<div class="row">
+		{{ column_left }}
+		<div id="content" class="col">
+			{{ content_top }}
+			<h1>{{ heading_title }}</h1>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-4 mb-2">
+							<strong class="lead">{{ text_order_id }}</strong><br/>
+							#{{ order_id }}
+						</div>
+						<div class="col-md-4 mb-2">
+							<strong class="lead">{{ text_date_added }}</strong><br/>
+							{{ date_added }}
+						</div>
+						<div class="col-md-4 mb-2">
+							<strong class="lead">{{ text_order_status }}</strong><br/>
+							{{ order_status ?: '—' }}
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col-md-8 mb-2">
+							<strong class="lead">{{ text_shipping_method }}</strong><br/>
+							{{ shipping_method ?: '—' }}
+						</div>
+						<div class="col-md-4 mb-2">
+							<strong class="lead">{{ text_shipping_code }}</strong><br/>
+							<code>{{ shipping_code ?: '—' }}</code>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% if not is_enviatodo %}
+				<div class="alert alert-warning">{{ text_not_enviatodo_order }}</div>
+			{% elseif shipment is null %}
+				<div class="alert alert-info">{{ text_no_shipment_yet }}</div>
+			{% else %}
+				<div class="card mb-3">
+					<div class="card-header">{{ text_shipment_details }}</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6 mb-2">
+								<strong>{{ text_status }}</strong><br/>
+								<span class="badge bg-info text-uppercase">{{ shipment.status_name|default(shipment.status)|default('—') }}</span>
+							</div>
+							<div class="col-md-6 mb-2">
+								<strong>{{ text_estimated_delivery }}</strong><br/>
+								{{ shipment.estimated_date|default('—') }}
+							</div>
+						</div>
+
+						<div class="row mt-2">
+							<div class="col-md-6 mb-2">
+								<strong>{{ text_carrier }}</strong><br/>
+								{{ shipment.provider_name|default(shipment.carrier)|default('—') }}
+								{% if shipment.service_name|default(shipment.service) %}
+									<small class="text-muted d-block">{{ shipment.service_name|default(shipment.service) }}</small>
+								{% endif %}
+							</div>
+							<div class="col-md-6 mb-2">
+								<strong>{{ text_delivery_mode }}</strong><br/>
+								{{ shipment.delivery_mode|default('—') }}
+							</div>
+						</div>
+
+						<div class="row mt-2">
+							<div class="col-md-6 mb-2">
+								<strong>{{ text_tracking_number }}</strong><br/>
+								<code>{{ shipment.carrier_tracking|default(shipment.tracking_number)|default('—') }}</code>
+							</div>
+							<div class="col-md-6 mb-2">
+								<strong>{{ text_internal_id }}</strong><br/>
+								<code>{{ shipment.tracking_id|default(shipment.tracking_number)|default('—') }}</code>
+							</div>
+						</div>
+
+						{% if shipment.cancelled_reason %}
+							<div class="alert alert-danger mt-3 mb-0">
+								<strong>{{ text_cancelled }}</strong>
+								{% if shipment.cancelled_at %}— {{ shipment.cancelled_at }}{% endif %}
+								<div>{{ shipment.cancelled_reason }}</div>
+							</div>
+						{% endif %}
+
+						<div class="mt-3">
+							{% if shipment.tracking_link_provider %}
+								<a href="{{ shipment.tracking_link_provider }}" target="_blank" rel="noopener" class="btn btn-primary">
+									<i class="fa-solid fa-up-right-from-square"></i> {{ button_track_carrier }}
+								</a>
+							{% endif %}
+							{% if shipment.tracking_link_internal %}
+								<a href="{{ shipment.tracking_link_internal }}" target="_blank" rel="noopener" class="btn btn-secondary">
+									<i class="fa-solid fa-up-right-from-square"></i> {{ button_track_internal }}
+								</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endif %}
+
+			<div class="text-end">
+				<a href="{{ url_back }}" class="btn btn-light"><i class="fa-solid fa-arrow-left"></i> {{ button_back }}</a>
+			</div>
+
+			{{ content_bottom }}
+		</div>
+	</div>
+</div>
+{{ footer }}

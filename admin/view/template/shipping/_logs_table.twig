@@ -1,0 +1,28 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <td style="width: 11rem;">{{ column_log_date }}</td>
+        <td style="width: 5rem;">{{ column_log_level }}</td>
+        <td>{{ column_log_endpoint }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% if logs %}
+        {% for log in logs %}
+          <tr>
+            <td><small class="text-muted">{{ log.created_at }}</small></td>
+            <td>
+              {% if log.level == 'error' %}<span class="badge bg-danger">{{ log.level }}</span>
+              {% elseif log.level == 'info' %}<span class="badge bg-info">{{ log.level }}</span>
+              {% else %}<span class="badge bg-secondary">{{ log.level }}</span>{% endif %}
+            </td>
+            <td><code>{{ log.endpoint }}</code></td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="3" class="text-center text-muted">{{ text_no_logs }}</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>

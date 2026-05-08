@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <td>{{ column_origin_name }}</td>
+        <td>{{ column_origin_address }}</td>
+        <td class="text-end">{{ column_origin_postal_code }}</td>
+        <td class="text-end">{{ column_origin_action }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% if origins %}
+        {% for origin in origins %}
+          <tr>
+            <td>
+              {{ origin.name }}
+              {% if origin.is_default %}<span class="badge bg-success ms-1">{{ text_default }}</span>{% endif %}
+            </td>
+            <td>{{ origin.street }} {{ origin.number }}, {{ origin.district }}, {{ origin.city }}, {{ origin.state }}, {{ origin.country }}</td>
+            <td class="text-end">{{ origin.postal_code }}</td>
+            <td class="text-end">
+              <button type="button" class="btn btn-info btn-sm origin-edit"   data-origin-id="{{ origin.origin_id }}"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="button" class="btn btn-danger btn-sm origin-delete" data-origin-id="{{ origin.origin_id }}"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="4" class="text-center text-muted">{{ text_no_origins }}</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
