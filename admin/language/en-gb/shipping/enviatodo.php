@@ -13,8 +13,8 @@ $_['tab_docs']                    = 'Docs';
 $_['text_extension']              = 'Extensions';
 $_['text_success']                = 'Success: You have modified EnviaTodo shipping!';
 $_['text_edit']                   = 'Edit EnviaTodo Shipping';
-$_['text_environment_sandbox']    = 'Sandbox / QA (apiqav2.enviatodo.mx)';
-$_['text_environment_production'] = 'Production (apiv2.enviatodo.mx)';
+$_['text_environment_sandbox']    = 'Sandbox / QA (apiqav2.enviatodo.com)';
+$_['text_environment_production'] = 'Production (api.enviatodo.com)';
 $_['text_select_origin']          = '-- None (configure an origin first) --';
 $_['text_strategy_aggregate']     = 'Aggregate weight + bounding box (single package)';
 $_['text_strategy_per_item']      = 'One package per cart item';
@@ -30,7 +30,7 @@ $_['text_origin_saved']           = 'Origin saved.';
 $_['text_origin_deleted']         = 'Origin deleted.';
 $_['text_carriers_refreshed']     = 'Carrier cache refreshed (%s carriers).';
 $_['text_no_origins']             = 'No origins yet. Click "Add origin" to create one.';
-$_['text_no_carriers']            = 'No carriers cached yet. Click "Refresh" to pull the list from enviatodo.mx.';
+$_['text_no_carriers']            = 'No carriers cached yet. Click "Refresh" to pull the list from enviatodo.com.';
 $_['text_no_logs']                = 'No log entries yet.';
 $_['text_default']                = 'Default';
 $_['text_confirm_delete']         = 'Delete this origin?';
@@ -87,7 +87,7 @@ $_['button_refresh_carriers']     = 'Refresh carriers';
 
 // Help
 $_['help_origins_empty']          = 'No origins configured yet. Add one in the "Origins" tab before quoting.';
-$_['help_base_url_override']      = 'Optional. Override the base URL (e.g. <code>https://apiqav3.enviatodo.mx/index.php</code>). Leave blank to use the standard QA/Production endpoint for the selected environment.';
+$_['help_base_url_override']      = 'Optional. Override the base URL (e.g. <code>https://apiqav3.enviatodo.com/index.php</code>). Leave blank to use the standard QA/Production endpoint for the selected environment.';
 $_['help_origins_phase']          = 'Origins management UI is added in Phase 4.';
 $_['help_carriers_phase']         = 'Carrier list refreshed from /carriers in Phase 3 (Test connection) / Phase 5.';
 $_['help_logs_phase']             = 'API request/response log viewer is added in Phase 2.';
@@ -103,9 +103,9 @@ $_['error_origin_country']        = 'Country is required.';
 
 // Docs tab
 $_['docs_settings']               = 'Top-level configuration. Save the form before testing connection or pulling carriers.';
-$_['docs_environment']            = 'Switches between EnviaTodo sandbox (apiqav2.enviatodo.mx) and production (apiv2.enviatodo.mx). Tokens are independent for each.';
+$_['docs_environment']            = 'Switches between EnviaTodo sandbox (apiqav2.enviatodo.com) and production (api.enviatodo.com). Tokens are independent for each.';
 $_['docs_token']                  = 'JWT bearer token issued in your EnviaTodo client portal. Sandbox tokens only work against sandbox; production tokens against production.';
-$_['docs_base_url_override']      = 'Optional. Pin a specific host (e.g. apiqav3.enviatodo.mx) when EnviaTodo asks you to point to a non-default endpoint. Leave empty to use the default for the selected environment.';
+$_['docs_base_url_override']      = 'Optional. Pin a specific host (e.g. apiqav3.enviatodo.com) when EnviaTodo asks you to point to a non-default endpoint. Leave empty to use the default for the selected environment.';
 $_['docs_default_origin']         = 'The origin used when generating live quotes for the storefront. Add at least one origin in the Origins tab and pick it here.';
 $_['docs_strategy']               = 'How the cart is converted into a parcel: aggregate weights into a single bounding-box package (default), or one parcel per cart line. Aggregate is cheaper for most stores.';
 $_['docs_log_level']              = 'Off | Errors only | Info | Debug. Logs are persisted in the DB and mirrored to system/storage/logs/enviatodo.log so you can also view them under System > Maintenance > Logs.';
@@ -118,7 +118,7 @@ $_['docs_logs_intro']             = 'Last 50 entries of API request/response pai
 $_['docs_logs_levels']            = 'Set the log level on the Settings tab. "Errors only" is the recommended default in production; switch to Debug temporarily when you need full request/response payloads.';
 $_['docs_logs_files']             = 'Same lines are also appended to <code>storage/logs/enviatodo.log</code> — open it from <em>System &gt; Maintenance &gt; Logs</em>.';
 $_['docs_help_title']             = 'Need help?';
-$_['docs_help_body']              = 'EnviaTodo Postman collection: <a href="https://documenter.getpostman.com/view/" target="_blank">documenter.getpostman.com</a>. Account questions: <a href="mailto:soporte@enviatodo.mx">soporte@enviatodo.mx</a>.';
+$_['docs_help_body']              = 'EnviaTodo Postman collection: <a href="https://documenter.getpostman.com/view/" target="_blank">documenter.getpostman.com</a>. Account questions: <a href="mailto:soporte@enviatodo.com">soporte@enviatodo.com</a>.';
 $_['docs_quickstart_title']       = 'Quick start';
 $_['docs_quickstart_step1']       = 'Paste your sandbox token in Settings.';
 $_['docs_quickstart_step2']       = 'Click "Test connection" — it should report your balance.';

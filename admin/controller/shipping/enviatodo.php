@@ -121,7 +121,7 @@ class Enviatodo extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
-	 * Calls enviatodo.mx GET Api/get_client_balance using the token
+	 * Calls enviatodo.com GET Api/get_client_balance using the token
 	 * for the currently selected environment. Used by the admin
 	 * "Test connection" button to surface auth/connectivity errors
 	 * before the storefront tries to quote.
@@ -273,7 +273,7 @@ class Enviatodo extends \Opencart\System\Engine\Controller {
 	}
 
 	/**
-	 * Pulls the carrier list from enviatodo.mx (Api/get_parcel_service)
+	 * Pulls the carrier list from enviatodo.com (Api/get_parcel_service)
 	 * and replaces the local cache. Used by the Carriers tab "Refresh"
 	 * button.
 	 */

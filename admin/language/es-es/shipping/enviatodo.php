@@ -13,8 +13,8 @@ $_['tab_docs']                    = 'Documentación';
 $_['text_extension']              = 'Extensiones';
 $_['text_success']                = '¡Éxito! Has modificado el envío EnviaTodo.';
 $_['text_edit']                   = 'Editar EnviaTodo';
-$_['text_environment_sandbox']    = 'Pruebas / QA (apiqav2.enviatodo.mx)';
-$_['text_environment_production'] = 'Producción (apiv2.enviatodo.mx)';
+$_['text_environment_sandbox']    = 'Pruebas / QA (apiqav2.enviatodo.com)';
+$_['text_environment_production'] = 'Producción (api.enviatodo.com)';
 $_['text_select_origin']          = '-- Ninguno (configura un origen primero) --';
 $_['text_strategy_aggregate']     = 'Peso agregado + caja envolvente (un solo paquete)';
 $_['text_strategy_per_item']      = 'Un paquete por artículo del carrito';
@@ -30,7 +30,7 @@ $_['text_origin_saved']           = 'Origen guardado.';
 $_['text_origin_deleted']         = 'Origen eliminado.';
 $_['text_carriers_refreshed']     = 'Caché de paqueterías actualizado (%s paqueterías).';
 $_['text_no_origins']             = 'Aún no hay orígenes. Haz clic en "Agregar origen" para crear uno.';
-$_['text_no_carriers']            = 'Aún no hay paqueterías en caché. Haz clic en "Actualizar" para traer la lista desde enviatodo.mx.';
+$_['text_no_carriers']            = 'Aún no hay paqueterías en caché. Haz clic en "Actualizar" para traer la lista desde enviatodo.com.';
 $_['text_no_logs']                = 'Aún no hay entradas de registro.';
 $_['text_default']                = 'Predeterminado';
 $_['text_confirm_delete']         = '¿Eliminar este origen?';
@@ -87,7 +87,7 @@ $_['button_refresh_carriers']     = 'Actualizar paqueterías';
 
 // Help
 $_['help_origins_empty']          = 'Aún no hay orígenes configurados. Agrega uno en la pestaña "Orígenes" antes de cotizar.';
-$_['help_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. <code>https://apiqav3.enviatodo.mx/index.php</code>). Déjalo vacío para usar el endpoint estándar QA/Producción del entorno seleccionado.';
+$_['help_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. <code>https://apiqav3.enviatodo.com/index.php</code>). Déjalo vacío para usar el endpoint estándar QA/Producción del entorno seleccionado.';
 $_['help_origins_phase']          = 'La gestión de orígenes se agrega en la Fase 4.';
 $_['help_carriers_phase']         = 'La lista de paqueterías se actualiza desde /carriers en las Fases 3 (Probar conexión) / 5.';
 $_['help_logs_phase']             = 'El visor de registros de la API se agrega en la Fase 2.';
@@ -103,9 +103,9 @@ $_['error_origin_country']        = 'El país es obligatorio.';
 
 // Documentación
 $_['docs_settings']               = 'Configuración general. Guarda el formulario antes de probar la conexión o actualizar paqueterías.';
-$_['docs_environment']            = 'Cambia entre el entorno de pruebas EnviaTodo (apiqav2.enviatodo.mx) y producción (apiv2.enviatodo.mx). Los tokens son independientes para cada uno.';
+$_['docs_environment']            = 'Cambia entre el entorno de pruebas EnviaTodo (apiqav2.enviatodo.com) y producción (api.enviatodo.com). Los tokens son independientes para cada uno.';
 $_['docs_token']                  = 'Token JWT emitido en tu portal de cliente EnviaTodo. Los tokens de pruebas solo funcionan en sandbox; los de producción solo en producción.';
-$_['docs_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. apiqav3.enviatodo.mx) cuando EnviaTodo te indique apuntar a un host distinto. Déjalo vacío para usar el endpoint estándar del entorno seleccionado.';
+$_['docs_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. apiqav3.enviatodo.com) cuando EnviaTodo te indique apuntar a un host distinto. Déjalo vacío para usar el endpoint estándar del entorno seleccionado.';
 $_['docs_default_origin']         = 'Origen utilizado al generar cotizaciones en el sitio. Agrega al menos un origen en la pestaña Orígenes y selecciónalo aquí.';
 $_['docs_strategy']               = 'Cómo se convierte el carrito en paquete: peso agregado dentro de una caja envolvente (por defecto) o un paquete por artículo. Agregado suele ser más económico.';
 $_['docs_log_level']              = 'Desactivado | Sólo errores | Info | Depuración. Los registros se guardan en la base de datos y se duplican en storage/logs/enviatodo.log para verlos también en Sistema > Mantenimiento > Registros.';
@@ -118,7 +118,7 @@ $_['docs_logs_intro']             = 'Últimas 50 entradas de pares request/respo
 $_['docs_logs_levels']            = 'Configura el nivel de registro en la pestaña Ajustes. "Sólo errores" es el valor recomendado en producción; pasa a Depuración temporalmente cuando necesites payloads completos.';
 $_['docs_logs_files']             = 'Las mismas líneas se agregan a <code>storage/logs/enviatodo.log</code> — ábrelo desde <em>Sistema &gt; Mantenimiento &gt; Registros</em>.';
 $_['docs_help_title']             = '¿Necesitas ayuda?';
-$_['docs_help_body']              = 'Colección Postman EnviaTodo: <a href="https://documenter.getpostman.com/view/" target="_blank">documenter.getpostman.com</a>. Soporte: <a href="mailto:soporte@enviatodo.mx">soporte@enviatodo.mx</a>.';
+$_['docs_help_body']              = 'Colección Postman EnviaTodo: <a href="https://documenter.getpostman.com/view/" target="_blank">documenter.getpostman.com</a>. Soporte: <a href="mailto:soporte@enviatodo.com">soporte@enviatodo.com</a>.';
 $_['docs_quickstart_title']       = 'Inicio rápido';
 $_['docs_quickstart_step1']       = 'Pega tu token de pruebas en Ajustes.';
 $_['docs_quickstart_step2']       = 'Haz clic en "Probar conexión" — debería mostrar tu saldo.';

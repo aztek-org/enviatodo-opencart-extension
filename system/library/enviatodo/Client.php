@@ -3,7 +3,7 @@ namespace Opencart\System\Library\Enviatodo;
 /**
  * Class Client
  *
- * Thin HTTP client for the enviatodo.mx REST API (V2). Handles
+ * Thin HTTP client for the enviatodo.com REST API (V2). Handles
  * environment switching, the three required headers
  * (`x-api-key`, `x-enviatodo-app`, `Authorization: Bearer …`),
  * JSON serialisation, error normalisation and request/response
@@ -21,7 +21,7 @@ namespace Opencart\System\Library\Enviatodo;
  * @package Opencart\System\Library\Enviatodo
  */
 class Client {
-	public const BASE_SANDBOX    = 'https://apiqav2.enviatodo.mx/index.php';
+	public const BASE_SANDBOX    = 'https://apiqav2.enviatodo.com/index.php';
 	public const BASE_PRODUCTION = 'https://api.enviatodo.com/index.php';
 
 	public const APP_HEADER = 'custom';
@@ -130,7 +130,7 @@ class Client {
 			));
 		}
 
-		// enviatodo.mx convention varies across endpoints, but errors
+		// enviatodo.com convention varies across endpoints, but errors
 		// generally arrive either as a non-2xx HTTP status, or as a 2xx
 		// body containing one of: { "status": "error", … },
 		// { "error": true, … }, { "meta": "error", … }, { "code": <non-200>, … }.
