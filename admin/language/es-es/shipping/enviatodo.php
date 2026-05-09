@@ -13,7 +13,7 @@ $_['tab_docs']                    = 'Documentación';
 $_['text_extension']              = 'Extensiones';
 $_['text_success']                = '¡Éxito! Has modificado el envío EnviaTodo.';
 $_['text_edit']                   = 'Editar EnviaTodo';
-$_['text_environment_sandbox']    = 'Pruebas / QA (apiqav2.enviatodo.com)';
+$_['text_environment_sandbox']    = 'Pruebas / QA (apiqav2.enviatodo.mx)';
 $_['text_environment_production'] = 'Producción (api.enviatodo.com)';
 $_['text_select_origin']          = '-- Ninguno (configura un origen primero) --';
 $_['text_strategy_aggregate']     = 'Peso agregado + caja envolvente (un solo paquete)';
@@ -87,7 +87,7 @@ $_['button_refresh_carriers']     = 'Actualizar paqueterías';
 
 // Help
 $_['help_origins_empty']          = 'Aún no hay orígenes configurados. Agrega uno en la pestaña "Orígenes" antes de cotizar.';
-$_['help_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. <code>https://apiqav3.enviatodo.com/index.php</code>). Déjalo vacío para usar el endpoint estándar QA/Producción del entorno seleccionado.';
+$_['help_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. <code>https://apiqav3.enviatodo.mx/index.php</code>). Déjalo vacío para usar el endpoint estándar QA/Producción del entorno seleccionado.';
 $_['help_origins_phase']          = 'La gestión de orígenes se agrega en la Fase 4.';
 $_['help_carriers_phase']         = 'La lista de paqueterías se actualiza desde /carriers en las Fases 3 (Probar conexión) / 5.';
 $_['help_logs_phase']             = 'El visor de registros de la API se agrega en la Fase 2.';
@@ -103,9 +103,9 @@ $_['error_origin_country']        = 'El país es obligatorio.';
 
 // Documentación
 $_['docs_settings']               = 'Configuración general. Guarda el formulario antes de probar la conexión o actualizar paqueterías.';
-$_['docs_environment']            = 'Cambia entre el entorno de pruebas EnviaTodo (apiqav2.enviatodo.com) y producción (api.enviatodo.com). Los tokens son independientes para cada uno.';
+$_['docs_environment']            = 'Cambia entre el entorno de pruebas EnviaTodo (apiqav2.enviatodo.mx) y producción (api.enviatodo.com). Los tokens son independientes para cada uno.';
 $_['docs_token']                  = 'Token JWT emitido en tu portal de cliente EnviaTodo. Los tokens de pruebas solo funcionan en sandbox; los de producción solo en producción.';
-$_['docs_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. apiqav3.enviatodo.com) cuando EnviaTodo te indique apuntar a un host distinto. Déjalo vacío para usar el endpoint estándar del entorno seleccionado.';
+$_['docs_base_url_override']      = 'Opcional. Sobrescribe la URL base (p. ej. apiqav3.enviatodo.mx) cuando EnviaTodo te indique apuntar a un host distinto. Déjalo vacío para usar el endpoint estándar del entorno seleccionado.';
 $_['docs_default_origin']         = 'Origen utilizado al generar cotizaciones en el sitio. Agrega al menos un origen en la pestaña Orígenes y selecciónalo aquí.';
 $_['docs_strategy']               = 'Cómo se convierte el carrito en paquete: peso agregado dentro de una caja envolvente (por defecto) o un paquete por artículo. Agregado suele ser más económico.';
 $_['docs_log_level']              = 'Desactivado | Sólo errores | Info | Depuración. Los registros se guardan en la base de datos y se duplican en storage/logs/enviatodo.log para verlos también en Sistema > Mantenimiento > Registros.';

@@ -21,7 +21,7 @@ namespace Opencart\System\Library\Enviatodo;
  * @package Opencart\System\Library\Enviatodo
  */
 class Client {
-	public const BASE_SANDBOX    = 'https://apiqav2.enviatodo.com/index.php';
+	public const BASE_SANDBOX    = 'https://apiqav2.enviatodo.mx/index.php';
 	public const BASE_PRODUCTION = 'https://api.enviatodo.com/index.php';
 
 	public const APP_HEADER = 'custom';

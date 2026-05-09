@@ -13,7 +13,7 @@ $_['tab_docs']                    = 'Docs';
 $_['text_extension']              = 'Extensions';
 $_['text_success']                = 'Success: You have modified EnviaTodo shipping!';
 $_['text_edit']                   = 'Edit EnviaTodo Shipping';
-$_['text_environment_sandbox']    = 'Sandbox / QA (apiqav2.enviatodo.com)';
+$_['text_environment_sandbox']    = 'Sandbox / QA (apiqav2.enviatodo.mx)';
 $_['text_environment_production'] = 'Production (api.enviatodo.com)';
 $_['text_select_origin']          = '-- None (configure an origin first) --';
 $_['text_strategy_aggregate']     = 'Aggregate weight + bounding box (single package)';
@@ -87,7 +87,7 @@ $_['button_refresh_carriers']     = 'Refresh carriers';
 
 // Help
 $_['help_origins_empty']          = 'No origins configured yet. Add one in the "Origins" tab before quoting.';
-$_['help_base_url_override']      = 'Optional. Override the base URL (e.g. <code>https://apiqav3.enviatodo.com/index.php</code>). Leave blank to use the standard QA/Production endpoint for the selected environment.';
+$_['help_base_url_override']      = 'Optional. Override the base URL (e.g. <code>https://apiqav3.enviatodo.mx/index.php</code>). Leave blank to use the standard QA/Production endpoint for the selected environment.';
 $_['help_origins_phase']          = 'Origins management UI is added in Phase 4.';
 $_['help_carriers_phase']         = 'Carrier list refreshed from /carriers in Phase 3 (Test connection) / Phase 5.';
 $_['help_logs_phase']             = 'API request/response log viewer is added in Phase 2.';
@@ -103,9 +103,9 @@ $_['error_origin_country']        = 'Country is required.';
 
 // Docs tab
 $_['docs_settings']               = 'Top-level configuration. Save the form before testing connection or pulling carriers.';
-$_['docs_environment']            = 'Switches between EnviaTodo sandbox (apiqav2.enviatodo.com) and production (api.enviatodo.com). Tokens are independent for each.';
+$_['docs_environment']            = 'Switches between EnviaTodo sandbox (apiqav2.enviatodo.mx) and production (api.enviatodo.com). Tokens are independent for each.';
 $_['docs_token']                  = 'JWT bearer token issued in your EnviaTodo client portal. Sandbox tokens only work against sandbox; production tokens against production.';
-$_['docs_base_url_override']      = 'Optional. Pin a specific host (e.g. apiqav3.enviatodo.com) when EnviaTodo asks you to point to a non-default endpoint. Leave empty to use the default for the selected environment.';
+$_['docs_base_url_override']      = 'Optional. Pin a specific host (e.g. apiqav3.enviatodo.mx) when EnviaTodo asks you to point to a non-default endpoint. Leave empty to use the default for the selected environment.';
 $_['docs_default_origin']         = 'The origin used when generating live quotes for the storefront. Add at least one origin in the Origins tab and pick it here.';
 $_['docs_strategy']               = 'How the cart is converted into a parcel: aggregate weights into a single bounding-box package (default), or one parcel per cart line. Aggregate is cheaper for most stores.';
 $_['docs_log_level']              = 'Off | Errors only | Info | Debug. Logs are persisted in the DB and mirrored to system/storage/logs/enviatodo.log so you can also view them under System > Maintenance > Logs.';
