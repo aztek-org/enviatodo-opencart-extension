@@ -1,7 +1,7 @@
 # EnviaTodo — OpenCart 4 Shipping Extension
 
 OpenCart v4 shipping extension that integrates the
-[EnviaTodo](https://enviatodo.com/) (envia.com) multi-carrier API into the
+[EnviaTodo](https://enviatodo.com/) multi-carrier API into the
 checkout, order management and customer tracking flows.
 
 ## Features

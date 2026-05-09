@@ -3,8 +3,8 @@
 $_['heading_title']    = 'EnviaTodo';
 
 // Text
-$_['text_description'] = 'Tarifas de envío en vivo desde Enviatodo / Envia.com';
-$_['text_description'] = 'Tarifas en vivo de EnviaTodo (envia.com)';
+$_['text_description'] = 'Tarifas de envío en vivo desde Enviatodo / Enviatodo.com';
+$_['text_description'] = 'Tarifas en vivo de EnviaTodo (enviatodo.com)';
 $_['text_eta_days']    = '%s días';
 
 // Customer tracking page (Phase 7)

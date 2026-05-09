@@ -6,7 +6,7 @@ namespace Opencart\Catalog\Model\Extension\Enviatodo\Shipping;
  * Storefront shipping quote provider. Loaded by OpenCart's checkout via:
  *   $this->load->model('extension/enviatodo/shipping/enviatodo');
  *
- * Calls envia.com Api/rates_client with the configured default origin
+ * Calls enviatodo.com Api/rates_client with the configured default origin
  * and the cart's destination address, then returns one OpenCart
  * shipping option per rate option (carrier × service) returned by the
  * API. Results are cached for 5 minutes per (origin + destination +

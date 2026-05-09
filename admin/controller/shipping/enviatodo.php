@@ -3,7 +3,7 @@ namespace Opencart\Admin\Controller\Extension\Enviatodo\Shipping;
 /**
  * Class Enviatodo
  *
- * Settings page for the Envia.com (enviatodo.com) shipping extension.
+ * Settings page for the Enviatodo.com shipping extension.
  *
  * @package Opencart\Admin\Controller\Extension\Enviatodo\Shipping
  */

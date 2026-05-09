@@ -3,7 +3,7 @@
 $_['heading_title']    = 'EnviaTodo';
 
 // Text
-$_['text_description'] = 'Live shipping rates from Enviatodo / Envia.com';
+$_['text_description'] = 'Live shipping rates from Enviatodo / Enviatodo.com';
 $_['text_eta_days']    = '%s days';
 
 // Customer tracking page (Phase 7)

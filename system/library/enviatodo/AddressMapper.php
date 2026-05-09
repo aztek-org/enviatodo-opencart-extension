@@ -5,7 +5,7 @@ namespace Opencart\System\Library\Enviatodo;
  *
  * Translates OpenCart-shaped addresses (country_id, zone_id, postcode,
  * address_1, …) and the local origin row into the structure expected by
- * envia.com /Api/rates_client (origin / destination blocks).
+ * enviatodo.com /Api/rates_client (origin / destination blocks).
  *
  * @package Opencart\System\Library\Enviatodo
  */

@@ -3,7 +3,7 @@ namespace Opencart\System\Library\Enviatodo;
 /**
  * Class Logger
  *
- * Persists envia.com API request/response pairs into oc_enviatodo_log
+ * Persists enviatodo.com API request/response pairs into oc_enviatodo_log
  * honouring the configured log level.
  *
  *  Threshold semantics (matches the admin "log_level" setting):

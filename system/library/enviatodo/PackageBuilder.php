@@ -4,7 +4,7 @@ namespace Opencart\System\Library\Enviatodo;
  * Class PackageBuilder
  *
  * Translates a cart payload into the package array expected by
- * envia.com /Api/rates_client (`quotes.package`).
+ * enviatodo.com /Api/rates_client (`quotes.package`).
  *
  * Strategies:
  *  - "aggregate" — sum weight; bounding box uses
