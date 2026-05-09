@@ -2,7 +2,7 @@
   "name": "EnviaTodo",
   "code": "enviatodo",
   "license": "GPL",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Aztek (ferrez.mx)",
   "link": "https://ferrez.mx/",
   "description": "Multi-carrier shipping for OpenCart 4 powered by the Enviatodo.com REST API. Live rate quoting at checkout, label generation, tracking and cancellation from the admin order page, configurable origins, sandbox/production environments, and a built-in diagnostic log."

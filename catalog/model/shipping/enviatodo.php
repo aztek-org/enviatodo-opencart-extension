@@ -123,7 +123,7 @@ class Enviatodo extends \Opencart\System\Engine\Model {
 
 			$title = $this->rateTitle($rate);
 
-			$quote_data['enviatodo_' . $key] = [
+			$quote_data[$key] = [
 				'code'         => 'enviatodo.' . $key,
 				'name'         => $title,
 				'cost'         => $cost,
